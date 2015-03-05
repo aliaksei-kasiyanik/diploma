@@ -1,0 +1,167 @@
+RadauIIA-3-Order-Method
+
+tol = Math.pow(10, -4)
+iter_count_h: 8763
+iter_count_2h: 9544
+ac_iter_count_h: 5997
+ac_iter_count_2h: 6319
+RELATIVE ERROR = 0.0028746259915793343
+
+tol = Math.pow(10, -5)
+iter_count_h: 20872
+iter_count_2h: 23026
+ac_iter_count_h: 9298
+ac_iter_count_2h: 9589
+RELATIVE ERROR = 6.392802605413776E-4
+
+tol = Math.pow(10, -6)
+iter_count_h: 22453
+iter_count_2h: 23513
+ac_iter_count_h: 12805
+ac_iter_count_2h: 13024
+RELATIVE ERROR = 2.366039887076005E-4
+
+tol = Math.pow(10, -7)
+iter_count_h: 20925
+iter_count_2h: 21106
+ac_iter_count_h: 16434
+ac_iter_count_2h: 16404
+RELATIVE ERROR = 6.253710665814845E-5
+
+tol = Math.pow(10, -8)
+iter_count_h: 20583
+iter_count_2h: 19839
+ac_iter_count_h: 20565
+ac_iter_count_2h: 19826
+RELATIVE ERROR = 8.259211721190601E-6
+
+tol = Math.pow(10, -9)
+iter_count_h: 25683
+iter_count_2h: 23782
+ac_iter_count_h: 25667
+ac_iter_count_2h: 23771
+RELATIVE ERROR = 1.0580731630737683E-6
+
+tol = Math.pow(10, -10)
+iter_count_h: 33458
+iter_count_2h: 29042
+ac_iter_count_h: 33444
+ac_iter_count_2h: 29033
+RELATIVE ERROR = 1.3764824808473116E-7
+----------------------------------------------------------
+
+RadauIIA-1-Order-Method
+
+
+tol = Math.pow(10, -4)
+iter_count_h: 28447
+iter_count_2h: 29982
+ac_iter_count_h: 12796
+ac_iter_count_2h: 13049
+RELATIVE ERROR = 0.2729483116147984
+
+
+tol = Math.pow(10, -5)
+iter_count_h: 23617
+iter_count_2h: 23198
+ac_iter_count_h: 23617
+ac_iter_count_2h: 23198
+RELATIVE ERROR = 0.09717577491450916
+
+
+tol = Math.pow(10, -6)
+iter_count_h: 37401
+iter_count_2h: 34424
+ac_iter_count_h: 37393
+ac_iter_count_2h: 34420
+RELATIVE ERROR = 0.028141478208724945
+
+
+tol = Math.pow(10, -7)
+iter_count_h: 62264
+iter_count_2h: 51557
+ac_iter_count_h: 62254
+ac_iter_count_2h: 51552
+RELATIVE ERROR = 0.008576590238274857
+
+
+tol = Math.pow(10, -8)
+iter_count_h: 134057
+iter_count_2h: 92182
+ac_iter_count_h: 134047
+ac_iter_count_2h: 92176
+RELATIVE ERROR = 0.002654645180684352
+
+
+tol = Math.pow(10, -9)
+iter_count_h: 347106
+iter_count_2h: 200934
+ac_iter_count_h: 347094
+ac_iter_count_2h: 200928
+RELATIVE ERROR = 8.285809358138383E-4
+
+
+tol = Math.pow(10, -10)
+iter_count_h: 1001139
+iter_count_2h: 531881
+ac_iter_count_h: 1001125
+ac_iter_count_2h: 531874
+RELATIVE ERROR = 2.600596244024791E-4
+
+------------------------------------------------------------------
+RadauIIA-5-Order-Method
+
+tol = Math.pow(10, -4)
+iter_count_h: 5204
+iter_count_2h: 5606
+ac_iter_count_h: 5204
+ac_iter_count_2h: 5606
+RELATIVE ERROR = 0.0087627960858367
+
+
+tol = Math.pow(10, -5)
+iter_count_h: 11027
+iter_count_2h: 12185
+ac_iter_count_h: 7941
+ac_iter_count_2h: 8379
+RELATIVE ERROR = 0.0032932723289253126
+
+
+tol = Math.pow(10, -6)
+iter_count_h: 17342
+iter_count_2h: 19116
+ac_iter_count_h: 10734
+ac_iter_count_2h: 11208
+RELATIVE ERROR = 3.496167010889938E-5
+
+
+tol = Math.pow(10, -7)
+iter_count_h: 21926
+iter_count_2h: 23571
+ac_iter_count_h: 13514
+ac_iter_count_2h: 13943
+RELATIVE ERROR = 5.240826531556351E-6
+
+
+tol = Math.pow(10, -8)
+iter_count_h: 25929
+iter_count_2h: 27080
+ac_iter_count_h: 16356
+ac_iter_count_2h: 16672
+RELATIVE ERROR = 2.3411051032853676E-7
+
+
+tol = Math.pow(10, -9)
+iter_count_h: 28309
+iter_count_2h: 28828
+ac_iter_count_h: 19345
+ac_iter_count_2h: 19375
+RELATIVE ERROR = 1.0554979323943421E-7
+
+
+tol = Math.pow(10, -10)
+iter_count_h: 26689
+iter_count_2h: 26139
+ac_iter_count_h: 23183
+ac_iter_count_2h: 22480
+RELATIVE ERROR = 7.504181848901115E-8

@@ -1,0 +1,152 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      5488,        143]
+NotebookOptionsPosition[      5238,        130]
+NotebookOutlinePosition[      5576,        145]
+CellTagsIndexPosition[      5533,        142]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"1", "_", "1"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"NN", "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "354", ",", "531", ",", "708", ",", "885", ",", "1062", ",", "1239"}], 
+      "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"gmres1", "=", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "5", ",", "14", ",", "20", ",", "42", ",", "65"}], 
+      "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"bicgstab1", "=", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "7", ",", "13", ",", "18", ",", "31", ",", "50"}], 
+      "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ipu1", "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "22", ",", "62", ",", "120", ",", "165", ",", "240", ",", "324"}], 
+      "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Needs", "[", "\"\<PlotLegends`\>\"", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"gp", "[", 
+      RowBox[{"NN_", ",", "arr_"}], "]"}], ":=", 
+     RowBox[{"Partition", "[", 
+      RowBox[{
+       RowBox[{"Riffle", "[", 
+        RowBox[{"NN", ",", "arr"}], "]"}], ",", "2"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"g1", "=", 
+     RowBox[{"ListPlot", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"gp", "[", 
+          RowBox[{"NN", ",", "gmres1"}], "]"}], ",", 
+         RowBox[{"gp", "[", 
+          RowBox[{"NN", ",", "bicgstab1"}], "]"}], ",", 
+         RowBox[{"gp", "[", 
+          RowBox[{"NN", ",", "ipu1"}], "]"}]}], "}"}], ",", 
+       RowBox[{"LabelStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"Bold", ",", 
+          RowBox[{"FontSize", "\[Rule]", "20"}], ",", "Black"}], "]"}]}], ",", 
+       RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+       RowBox[{"PlotMarkers", "\[Rule]", "Automatic"}], " ", ",", 
+       RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Directive", "[", 
+            RowBox[{"PointSize", "[", ".4", "]"}], "]"}], ",", 
+           RowBox[{"Thickness", "[", "0.005", "]"}]}], "}"}], "}"}]}], ",", 
+       RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+       RowBox[{"PlotLegendStyle", "\[Rule]", 
+        RowBox[{"{", "Large", "}"}]}], ",", 
+       RowBox[{"PlotLegend", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<GMRES\>\"", ",", "20", ",", "Bold"}], "]"}], ",", 
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<BICGSTAB\>\"", ",", "20", ",", "Bold"}], "]"}], ",", 
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<IPS\>\"", ",", "20", ",", "Bold"}], "]"}]}], "}"}]}], 
+       ",", 
+       RowBox[{"LegendPosition", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"1.1", ",", 
+          RowBox[{"-", "0.4"}]}], "}"}]}], ",", 
+       RowBox[{"Joined", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"True", ",", "True", ",", "False"}], "}"}]}], ",", 
+       RowBox[{"PlotMarkers", "\[Rule]", "Automatic"}], ",", 
+       RowBox[{"FrameLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<N\>\"", ",", "\"\<t, s\>\""}], "}"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "1000"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Export", "[", 
+    RowBox[{"\"\</home/geldor/num_ex_1_1.pdf\>\"", ",", "g1"}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.548692094019304*^9, 3.548692095677838*^9}, {
+   3.548692682846122*^9, 3.548692693516106*^9}, {3.548692982518377*^9, 
+   3.548693009279049*^9}, {3.548693063855138*^9, 3.54869317461926*^9}, {
+   3.548693282476042*^9, 3.548693391108202*^9}, {3.548693489187525*^9, 
+   3.548693656246723*^9}, {3.548693704488325*^9, 3.548693705703415*^9}, {
+   3.548693739751183*^9, 3.548693821183014*^9}, {3.548694026217223*^9, 
+   3.548694029646674*^9}, {3.548694193344562*^9, 3.548694214029814*^9}, {
+   3.548694421135059*^9, 3.548694508796934*^9}, {3.548694565036141*^9, 
+   3.548694573688998*^9}, {3.548695165840475*^9, 3.548695166853346*^9}, {
+   3.548695281909087*^9, 3.548695342386078*^9}, {3.548695402706329*^9, 
+   3.548695434236022*^9}, {3.548695531886662*^9, 3.548695611172165*^9}, {
+   3.548695772783762*^9, 3.548695866525095*^9}, {3.548696187703103*^9, 
+   3.548696207852464*^9}, {3.548795128058586*^9, 3.54879513779313*^9}, 
+   3.548830792683058*^9, 3.548831099648605*^9, {3.548831146222034*^9, 
+   3.548831148039409*^9}, {3.548832080607398*^9, 3.548832080939103*^9}, {
+   3.577708152739544*^9, 3.577708174879547*^9}, {3.57770822637695*^9, 
+   3.577708229178184*^9}, 3.577708296994314*^9}]
+},
+WindowSize->{640, 655},
+WindowMargins->{{150, Automatic}, {Automatic, 52}},
+FrontEndVersion->"7.0 for Linux x86 (32-bit) (February 25, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 4689, 108, 407, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
