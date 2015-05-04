@@ -109,6 +109,13 @@ public final class MatrixUtils {
         return a.multiply(b).getColumn(0);
     }
 
+    public static double[] multiply(double[] m, double[] v) {
+        RealMatrix a = new Array2DRowRealMatrix(m);
+        RealMatrix b = new Array2DRowRealMatrix(v);
+
+        return a.multiply(b).getColumn(0);
+    }
+
     public static double[][] subtract(double[][] m1, double[][] m2) {
         RealMatrix a = new Array2DRowRealMatrix(m1);
         RealMatrix b = new Array2DRowRealMatrix(m2);
@@ -279,6 +286,11 @@ public final class MatrixUtils {
             System.out.print(v + " ");
         }
         System.out.print("]----------------");
+    }
+
+    public static void ratio() {
+
+
     }
 
 

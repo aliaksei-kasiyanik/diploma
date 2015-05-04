@@ -50,4 +50,9 @@ public class SimpleProblem extends SteadyingEquation {
         //temporary!!!!!!!!!!!
         return 0.3333333;
     }
+
+    @Override
+    public double[][] getG() {
+        return new double[0][];
+    }
 }

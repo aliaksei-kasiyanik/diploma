@@ -10,12 +10,12 @@ import com.akasiyanik.bsu.coursework.methods.rungekutta.RungeKuttaMethod;
  */
 public abstract class SteadyingEquation {
 
-    private RungeKuttaMethod implicitRungeKuttaMethod;
-    private double tau;
-    private double t0;
-    private double[] y0;
-    private int n;
-    private int s;
+    protected RungeKuttaMethod implicitRungeKuttaMethod;
+    protected double tau;
+    protected double t0;
+    protected double[] y0;
+    protected int n;
+    protected int s;
 
     public abstract double[] f(double t, double[] arg);
 
@@ -25,8 +25,10 @@ public abstract class SteadyingEquation {
 
     public abstract double getAMatrMaxEigenvalue();
 
+    public abstract double[][] getG();
+
     public double getW() {
-        double nu = tau * Math.abs(getJacobiMatrMaxEigenvalue(t0, y0) * getAMatrMaxEigenvalue()) + 1.0;
+        double nu = tau * Math.abs(getJacobiMatrMaxEigenvalue(t0, y0) * getAMatrMaxEigenvalue()) - 1.0;
         double w = 1.0 / nu * 0.7;
         return w;
     }

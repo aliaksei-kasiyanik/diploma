@@ -3,6 +3,8 @@ package com.akasiyanik.bsu.coursework.utils;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.AuxRungeKuttaMethod;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.RungeKuttaMethod;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Locale;
@@ -119,5 +121,28 @@ public final class FileUtils {
 
         return new RungeKuttaMethod(s, a, b, c);
     }
+
+    public static double[] readOpressionCoefficients(InputStream inputStream) throws FileNotFoundException {
+        Scanner scanner = new Scanner(inputStream);
+        scanner.useLocale(Locale.US);
+
+        int n = scanner.nextInt();
+        double[] coeffs = new double[n];
+        for (int i = 0; i < n; i++) {
+            coeffs[i] = scanner.nextDouble();
+        }
+        return coeffs;
+    }
+
+    public static void main(String[] args) {
+        try {
+            InputStream is = new FileInputStream(new File("E:\\university\\diploma\\modules\\src\\main\\resources\\opression_coefficients.txt"));
+            double[] coeffs = readOpressionCoefficients(is);
+            System.out.println(coeffs);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

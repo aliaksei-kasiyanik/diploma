@@ -1,6 +1,6 @@
 package com.akasiyanik.bsu.coursework.methods.rungekutta;
 
-import org.apache.commons.math3.linear.*;
+//import org.apache.commons.math3.linear.*;
 
 import java.io.OutputStream;
 

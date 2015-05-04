@@ -11,13 +11,13 @@ import com.akasiyanik.bsu.coursework.utils.MatrixUtils;
  */
 public class SteadyingProcess {
 
-    private static double EPS;
-    private SteadyingEquation steadyingEquation;
-    private double w;
-    private AuxRungeKuttaMethod auxMethod;
+    protected static double EPS;
+    protected SteadyingEquation steadyingEquation;
+    protected double w;
+    protected AuxRungeKuttaMethod auxMethod;
 
-    private int iterationCount = 0;
-    private int iterationCountWithClarifying = 0;
+    protected int iterationCount = 0;
+    protected int iterationCountWithClarifying = 0;
 
     public SteadyingProcess(AuxRungeKuttaMethod auxMethod, double EPS, double w, SteadyingEquation steadyingEquation) {
         this.auxMethod = auxMethod;
@@ -43,15 +43,9 @@ public class SteadyingProcess {
         iterationCount = 0;
         iterationCountWithClarifying = 0;
         do {
-            double[] Y1;
-            if (iterationCount % 2 == 0) {
-                Y1 = doSteadyingIterationWithClarifying(Y);
-                iterationCountWithClarifying++;
-            } else {
-                Y1 = doSimpleSteadyingIteration(Y);
-            }
+            double[] Y1 = doSimpleSteadyingIteration(Y);
             err = calculateErr(Y, Y1);
-//            System.out.println("POST In method Err = " + err);
+            System.out.println("POST In method Err = " + err);
             Y = Y1;
             iterationCount++;
         } while (err >= EPS);
@@ -60,67 +54,12 @@ public class SteadyingProcess {
         return Y;
     }
 
-
-
-    private double[] doSteadyingIterationWithClarifying(double[] Y) {
-        double[] Y1 = F(Y);
-//        System.out.println("---------------- Y1 ----------------");
-//        printArray(Y1);
-//        double err = calculateErr(Y, Y1);
-//        System.out.println("\nPRE In method Err = " + err);
-        if (checkingConvergence()) {
-            return clarify(Y, Y1);
-        } else {
-            return Y1;
-        }
-    }
-
     private double[] doSimpleSteadyingIteration(double[] Y) {
        return F(Y);
     }
 
-    private boolean checkingConvergence() { // проверка сходимости
-        // todo akasiyanik
-        return true;
-    }
 
-    private double[] clarify(double[] Y, double[] Y1) {
-        double[] r_k = steadyingEquation.r(Y);
-        double[] r_k1 = steadyingEquation.r(Y1);
-        double lambda_m = getEigenvalueApproximation(r_k, r_k1);
-        Y1 = MatrixUtils.subtract(Y1, MatrixUtils.scalarMultipy(1.0 / lambda_m, r_k1));
-        return Y1;
-    }
-
-    //среднее значение центрального квантиля
-
-    private double getEigenvalueApproximation(double[] r_k, double[] r_k1) { //getting lambda_m
-        double derRin0 = auxMethod.getDerivativeRin0();
-        double[] v = MatrixUtils.perComponentDivisionWithZerosInFraction(r_k1, r_k);
-        //todo akasiyanik instead of average it is required to use average of central quantile
-        double t = MatrixUtils.getMedianWithoutZeros(v);
-//        System.out.println("!!!median: " + t);
-        double eigenvalueApproximation = (t - 1.0) / (w * derRin0);
-//        System.out.println("!!!eigenvalueApproximation: " + eigenvalueApproximation);
-
-        return eigenvalueApproximation;
-    }
-
-    private int getMostHeavyComponentNumber(double[] Y, double[] Y1) {
-        double maxDiff = 0.0;
-        int mostHeavyComponent = 0;
-
-        for (int i = 0; i < Y.length; i++) {
-            if (Math.abs(Y1[i] - Y[i]) >= maxDiff) {
-                maxDiff = Math.abs(Y1[i] - Y[i]);
-                mostHeavyComponent = i;
-            }
-        }
-        return mostHeavyComponent;
-    }
-
-
-    private double calculateErr(double[] arr1, double[] arr2) {
+    protected double calculateErr(double[] arr1, double[] arr2) {
         double max_err = 0.0;
         for (int i = 0; i < arr1.length; i++) {
             double err = Math.abs(arr1[i] - arr2[i]);
@@ -131,7 +70,7 @@ public class SteadyingProcess {
         return max_err;
     }
 
-    private double[] F(double[] Y0) {
+    protected double[] F(double[] Y0) {
         int n = auxMethod.getN();
         double[][] betta = auxMethod.getBetta();
         double[] Y = Y0;
