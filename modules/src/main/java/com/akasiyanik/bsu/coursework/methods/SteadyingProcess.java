@@ -42,10 +42,11 @@ public class SteadyingProcess {
         double err;
         iterationCount = 0;
         iterationCountWithClarifying = 0;
+
         do {
             double[] Y1 = doSimpleSteadyingIteration(Y);
             err = calculateErr(Y, Y1);
-            System.out.println("POST In method Err = " + err);
+//            System.out.println("POST In method Err = " + err);
             Y = Y1;
             iterationCount++;
         } while (err >= EPS);

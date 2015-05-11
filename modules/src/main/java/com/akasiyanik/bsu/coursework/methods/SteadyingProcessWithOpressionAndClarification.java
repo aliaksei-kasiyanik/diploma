@@ -10,7 +10,9 @@ import static com.akasiyanik.bsu.coursework.utils.MatrixUtils.scalarMultipy;
 /**
  * @author akasiyanik
  */
-public class SteadyingProcessWithOpressionAndClarification extends SteadyingProcess {
+public class SteadyingProcessWithOpressionAndClarification extends SteadyingProcessWithClarification {
+
+    private int matrixVectorMultimplicationCount;
 
     protected double[] opressorCoefficients;
 
@@ -52,13 +54,14 @@ public class SteadyingProcessWithOpressionAndClarification extends SteadyingProc
         return opress(G, r, opressorCoefficients);
     }
 
-    public static double[] opress(double[][] A, double[] r0, double[] coeffs) {
+    public double[] opress(double[][] A, double[] r0, double[] coeffs) {
         int coeffNumber = coeffs.length;
         double[] res = new double[r0.length];
         double[] tmp = new double[r0.length];
         for (int i = coeffNumber - 1; i >= 0; i--) {
             tmp = add(res, scalarMultipy(coeffs[i], r0));
             res = multiply(A, tmp);
+            matrixVectorMultimplicationCount++;
         }
         return tmp;
     }

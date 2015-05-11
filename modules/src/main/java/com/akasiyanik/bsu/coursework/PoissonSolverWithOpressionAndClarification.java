@@ -2,6 +2,7 @@ package com.akasiyanik.bsu.coursework;
 
 import com.akasiyanik.bsu.coursework.equations.SteadyingEquation;
 import com.akasiyanik.bsu.coursework.methods.SteadyingProcessWithOpression;
+import com.akasiyanik.bsu.coursework.methods.SteadyingProcessWithOpressionAndClarification;
 import com.akasiyanik.bsu.coursework.methods.power.PowerMethod;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.AuxRungeKuttaMethod;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.RungeKuttaMethod;
@@ -9,7 +10,11 @@ import com.akasiyanik.bsu.coursework.problems.PoissonProblem;
 import com.akasiyanik.bsu.coursework.utils.FileUtils;
 import com.akasiyanik.bsu.coursework.utils.MatrixUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author akasiyanik
@@ -78,7 +83,7 @@ public class PoissonSolverWithOpressionAndClarification implements Solver {
         System.out.println("1/newW: " + w);
         setIterationCount(0);
 
-        SteadyingProcessWithOpression steadyingProcess = new SteadyingProcessWithOpression(auxRungeKuttaMethod, eps, w, steadyingEquation, opressionCoeffs);
+        SteadyingProcessWithOpressionAndClarification steadyingProcess = new SteadyingProcessWithOpressionAndClarification(auxRungeKuttaMethod, eps, w, steadyingEquation, opressionCoeffs);
         double[] Y = steadyingProcess.getY();
 
         setIterationCountWithClarifying(steadyingProcess.getIterationCountWithClarifying());

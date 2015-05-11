@@ -2,6 +2,7 @@ package com.akasiyanik.bsu.coursework;
 
 import com.akasiyanik.bsu.coursework.equations.SteadyingEquation;
 import com.akasiyanik.bsu.coursework.methods.SteadyingProcess;
+import com.akasiyanik.bsu.coursework.methods.SteadyingProcessWithClarification;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.AuxRungeKuttaMethod;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.RungeKuttaMethod;
 import com.akasiyanik.bsu.coursework.problems.PoissonProblem;
@@ -51,24 +52,24 @@ public class PoissonSolverWithClarification implements Solver {
         double w = steadyingEquation.getW();
         setIterationCount(0);
 
-        SteadyingProcess steadyingProcess = new SteadyingProcess(auxRungeKuttaMethod, eps, w, steadyingEquation);
+        SteadyingProcessWithClarification steadyingProcess = new SteadyingProcessWithClarification(auxRungeKuttaMethod, eps, w, steadyingEquation);
         double[] Y = steadyingProcess.getY();
 
         setIterationCountWithClarifying(steadyingProcess.getIterationCountWithClarifying());
 
         double[] solution = steadyingEquation.getSolution(Y);
 
-        System.out.println("With clarifying: " + getIterationCountWithClarifying());
+//        System.out.println("With clarifying: " + getIterationCountWithClarifying());
 
-        System.out.println("Y:");
-        for (int i = 0; i < Y.length; i++) {
-            System.out.println(Y[i]);
-        }
+//        System.out.println("Y:");
+//        for (int i = 0; i < Y.length; i++) {
+//            System.out.println(Y[i]);
+//        }
 
-        System.out.println("Solution:");
-        for (int i = 0; i < solution.length; i++) {
-            System.out.println(solution[i]);
-        }
+//        System.out.println("Solution:");
+//        for (int i = 0; i < solution.length; i++) {
+//            System.out.println(solution[i]);
+//        }
 
         return solution;
     }

@@ -4,7 +4,7 @@ import com.akasiyanik.bsu.coursework.equations.SteadyingEquation;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.RungeKuttaMethod;
 
 /**
- * @author: akasiyanik
+ * @author akasiyanik
  */
 public class HiresProblem extends SteadyingEquation {
 

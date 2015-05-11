@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 /**
- * @author: akasiyanik
+ * @author akasiyanik
  */
 public class HiresSolver implements Solver {
 
@@ -52,8 +52,8 @@ public class HiresSolver implements Solver {
 //        double eps = Math.pow(10, -5);
         double w = steadyingEquation.getW();
         setIterationCount(0);
-        setIterationCountWithClarifying(0);
-//        System.out.println("w = " + w);
+//        setIterationCountWithClarifying(0);
+        System.out.println("w = " + w);
 
         SteadyingProcess steadyingProcess = new SteadyingProcess(auxRungeKuttaMethod, eps, w, steadyingEquation);
         double[] Y = steadyingProcess.getY();

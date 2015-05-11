@@ -28,15 +28,17 @@ public class PoissonProblem extends LinearSteadyingEquation {
 
     @Override
     public double[] f(double t, double[] arg) {
-        int n = 30;
-        double[] res = new double[30];
+//        int n = 30;
+//        double[] res = new double[30];
+        double[] res = new double[n];
+        double tmp = n * n;
         for (int i = 0; i < n; i++) {
-            res[i] += arg[i] * -1922.0;
+            res[i] += arg[i] * tmp * (- 2);
             if (i < n - 1) {
-                res[i] += arg[i + 1] * 961;
+                res[i] += arg[i + 1] * tmp;
             }
             if (i > 0) {
-                res[i] += arg[i - 1] * 961;
+                res[i] += arg[i - 1] * tmp;
             }
         }
         return res;
@@ -49,7 +51,7 @@ public class PoissonProblem extends LinearSteadyingEquation {
 
     @Override
     public double getJacobiMatrMaxEigenvalue(double t, double[] arg) {
-        int n = 30;
+//        int n = 30;
         List<Double> evs = new ArrayList<Double>();
         for (int i = 0; i < n; i++) {
             double e = -4 * Math.pow(n - 1.0, 2.0) * Math.pow(Math.sin(Math.PI * i / (2 * n + 2)), 2);
@@ -68,15 +70,31 @@ public class PoissonProblem extends LinearSteadyingEquation {
     @Override
     public double[][] getJMatrix() {
         double[][] J = new double[n][n];
+        double tmp = n * n ;
         for (int i = 0; i < n; i++) {
-            J[i][i] = -1922.0;
+            J[i][i] = - 2 * tmp;
             if (i < n - 1) {
-                J[i][i + 1] = 961.0;
+                J[i][i + 1] = tmp;
             }
             if (i > 0) {
-                J[i][i - 1] = 961.0;
+                J[i][i - 1] = tmp;
             }
         }
         return J;
     }
+
+//    @Override
+//    public double[][] getJMatrix() {
+//        double[][] J = new double[n][n];
+//        for (int i = 0; i < n; i++) {
+//            J[i][i] = -1922.0;
+//            if (i < n - 1) {
+//                J[i][i + 1] = 961.0;
+//            }
+//            if (i > 0) {
+//                J[i][i - 1] = 961.0;
+//            }
+//        }
+//        return J;
+//    }
 }

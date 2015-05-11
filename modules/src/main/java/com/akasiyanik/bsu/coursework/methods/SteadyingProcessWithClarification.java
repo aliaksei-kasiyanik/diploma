@@ -6,7 +6,7 @@ import com.akasiyanik.bsu.coursework.utils.MatrixUtils;
 
 
 /**
- * @author: akasiyanik
+ * @author akasiyanik
  */
 public class SteadyingProcessWithClarification extends SteadyingProcess {
 
@@ -40,7 +40,7 @@ public class SteadyingProcessWithClarification extends SteadyingProcess {
                 Y1 = doSimpleSteadyingIteration(Y);
             }
             err = calculateErr(Y, Y1);
-            System.out.println("POST In method Err = " + err);
+//            System.out.println("POST In method Err = " + err);
             Y = Y1;
             iterationCount++;
         } while (err >= EPS);

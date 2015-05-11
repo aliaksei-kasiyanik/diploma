@@ -59,17 +59,17 @@ public class PoissonSolver implements Solver {
 
         double[] solution = steadyingEquation.getSolution(Y);
 
-        System.out.println("With clarifying: " + getIterationCountWithClarifying());
+//        System.out.println("With clarifying: " + getIterationCountWithClarifying());
+//
+//        System.out.println("Y:");
+//        for (int i = 0; i < Y.length; i++) {
+//            System.out.println(Y[i]);
+//        }
 
-        System.out.println("Y:");
-        for (int i = 0; i < Y.length; i++) {
-            System.out.println(Y[i]);
-        }
-
-        System.out.println("Solution:");
-        for (int i = 0; i < solution.length; i++) {
-            System.out.println(solution[i]);
-        }
+//        System.out.println("Solution:");
+//        for (int i = 0; i < solution.length; i++) {
+//            System.out.println(solution[i]);
+//        }
 
         return solution;
     }
