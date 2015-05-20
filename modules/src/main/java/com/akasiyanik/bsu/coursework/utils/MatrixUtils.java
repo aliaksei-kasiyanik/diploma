@@ -1,19 +1,15 @@
 package com.akasiyanik.bsu.coursework.utils;
 
-import org.apache.commons.math3.exception.DimensionMismatchException;
-import org.apache.commons.math3.exception.NullArgumentException;
-import org.apache.commons.math3.exception.OutOfRangeException;
-import org.apache.commons.math3.exception.ZeroException;
 import org.apache.commons.math3.linear.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
- * @author: akasiyanik
+ * @author akasiyanik
  */
 public final class MatrixUtils {
+
+    private static int matrixVectorCount;
 
     public static final double ZERO = Math.pow(10, -10);
 
@@ -103,6 +99,7 @@ public final class MatrixUtils {
     }
 
     public static double[] multiply(double[][] m, double[] v) {
+        matrixVectorCount++;
         RealMatrix a = new Array2DRowRealMatrix(m);
         RealMatrix b = new Array2DRowRealMatrix(v);
 
@@ -183,6 +180,25 @@ public final class MatrixUtils {
         double[] relError = new double[dim];
         for (int i = 0; i < dim; i++) {
             relError[i] = Math.abs(exactSolution[i] - apprSolution[i]) / Math.abs(exactSolution[i]);
+        }
+
+        double max = 0;
+        for (int i = 0; i < dim; i++) {
+            if (relError[i] > max) {
+                max = relError[i];
+            }
+        }
+        return max;
+    }
+
+
+    public static double calculateMaxError(double[] apprSolution, double[] exactSolution) {
+
+        int dim = apprSolution.length;
+
+        double[] relError = new double[dim];
+        for (int i = 0; i < dim; i++) {
+            relError[i] = Math.abs(exactSolution[i] - apprSolution[i]);
         }
 
         double max = 0;
@@ -288,11 +304,23 @@ public final class MatrixUtils {
         System.out.print("]----------------");
     }
 
-    public static void ratio() {
-
-
+    public static double maxComponent(double[] array) {
+        double max = 0.0;
+        for (double c : array) {
+            if (Math.abs(c) > max) {
+                max = Math.abs(c);
+            }
+        }
+        return max;
     }
 
 
 
+    public static int getMatrixVectorCount() {
+        return matrixVectorCount;
+    }
+
+    public static void resetMatrixVectorCount() {
+        MatrixUtils.matrixVectorCount = 0;
+    }
 }

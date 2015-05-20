@@ -72,7 +72,9 @@ public class PoissonSolverWithOpression implements Solver {
         SteadyingEquation steadyingEquation = new PoissonProblem(tau, t0, y0, baseRungeKuttaMethod);
 
 //        double w = steadyingEquation.getW();
-        double w = - 0.9 / getNewW(steadyingEquation, opressionCoeffs) ;
+//        double w = - 0.9 / 188.65757365620536;
+        double w = - 0.7 / getNewW(steadyingEquation, opressionCoeffs);
+//        System.out.println("newW = " + w);
 //        System.out.println("original w: " + steadyingEquation.getW());
 //        System.out.println("new w: " + getNewW(steadyingEquation, opressionCoeffs));
 //        System.out.println("1/newW: " + w);
@@ -92,7 +94,7 @@ public class PoissonSolverWithOpression implements Solver {
 //            System.out.println(Y[i]);
 //        }
 
-        System.out.println("MATRIX x VECTOR count - " + SteadyingProcessWithOpression.getMatrixVectorMultimplicationCount());
+//        System.out.println("MATRIX x VECTOR count - " + SteadyingProcessWithOpression.getMatrixVectorMultimplicationCount());
 
 //        System.out.println("Solution:");
 //        for (int i = 0; i < solution.length; i++) {

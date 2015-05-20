@@ -4,6 +4,8 @@ import com.akasiyanik.bsu.coursework.PoissonSolver;
 import com.akasiyanik.bsu.coursework.PoissonSolverWithClarification;
 import com.akasiyanik.bsu.coursework.PoissonSolverWithOpression;
 import com.akasiyanik.bsu.coursework.PoissonSolverWithOpressionAndClarification;
+import com.akasiyanik.bsu.coursework.Solver;
+import com.akasiyanik.bsu.coursework.utils.MatrixUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
 /**
@@ -12,51 +14,44 @@ import org.apache.commons.lang3.time.StopWatch;
 public class DiplomaTest {
 
     private static double eps = Math.pow(10, -8);
+    private static double tau = 0.05;
+    private static double t0 = 0.0;
+    private static double[] y0;
 
     public static void main(String[] args) {
-        double tau = 0.05;
-        int[] testSizes = {20, 30, 50, 100, 250};
 
-        double t0 = 0.0;
+//        int[] testSizes = {30};
+        int[] testSizes = {20, 30, 50, 100, 150, 200, 300};
 
         for (int n : testSizes) {
-            double[] y0 = getY0(n);
+            y0 = getY0(n);
             System.out.println("-------- SIZE N = " + n + "-----------");
 
             System.out.println("--- SP ---");
-
-            StopWatch w = new StopWatch();
-            w.start();
-            PoissonSolver solver = new PoissonSolver();
-            solver.solve(t0, y0, tau, eps);
-            w.split();
-            System.out.println("Time : " + w.toSplitString());
-            w.stop();
-            w.reset();
+            solve(new PoissonSolver());
 
             System.out.println("--- SP with CLARIFICATION ---");
-
-            w.start();
-            PoissonSolverWithClarification solverWithClarif = new PoissonSolverWithClarification();
-            solverWithClarif.solve(t0, y0, tau, eps);
-            w.split();
-            System.out.println("Time : " + w.toSplitString());
-            w.stop();
-            w.reset();
+            solve(new PoissonSolverWithClarification());
 
             System.out.println("--- SP with PRECONDITIONING ---");
-
-            w.start();
-            PoissonSolverWithOpression solverWithOpr = new PoissonSolverWithOpression();
-            solverWithOpr.solve(t0, y0, tau, eps);
-            w.split();
-            System.out.println("Time : " + w.toSplitString());
-            w.stop();
-            w.reset();
+            solve(new PoissonSolverWithOpression());
 
 //        PoissonSolverWithOpressionAndClarification superSolver = new PoissonSolverWithOpressionAndClarification();
 //        superSolver.solve(t0, y0, tau, eps);
         }
+
+    }
+
+    private static void solve(Solver solver) {
+        MatrixUtils.resetMatrixVectorCount();
+        StopWatch w = new StopWatch();
+        w.start();
+        solver.solve(t0, y0, tau, eps);
+        System.out.println("MATRIX x VECTOR count = " + MatrixUtils.getMatrixVectorCount());
+        w.split();
+        System.out.println("Time : " + w.toSplitString());
+        w.stop();
+        w.reset();
 
     }
 
