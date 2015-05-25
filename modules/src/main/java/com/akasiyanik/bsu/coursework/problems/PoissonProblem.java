@@ -52,7 +52,7 @@ public class PoissonProblem extends LinearSteadyingEquation {
     @Override
     public double getJacobiMatrMaxEigenvalue(double t, double[] arg) {
 //        int n = 30;
-        List<Double> evs = new ArrayList<Double>();
+        List<Double> evs = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             double e = -4 * Math.pow(n - 1.0, 2.0) * Math.pow(Math.sin(Math.PI * i / (2 * n + 2)), 2);
             evs.add(Math.abs(e));
