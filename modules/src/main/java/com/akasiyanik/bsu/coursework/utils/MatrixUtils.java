@@ -314,6 +314,19 @@ public final class MatrixUtils {
         return max;
     }
 
+    public static double[][] split(double[] v, int s) {
+        double[][] res = new double[s][];
+        int partSize = v.length / s;
+        for (int i = 0; i < s; i++) {
+            double[] tmp = new double[partSize];
+            for (int j = 0; j < partSize; j++) {
+                tmp[j] = v[i * partSize + j];
+            }
+            res[i] = tmp;
+        }
+        return res;
+    }
+
 
 
     public static int getMatrixVectorCount() {

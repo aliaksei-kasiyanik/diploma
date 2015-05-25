@@ -1,10 +1,8 @@
 package com.akasiyanik.bsu.coursework.tests;
 
 import com.akasiyanik.bsu.coursework.PoissonSolver;
-import com.akasiyanik.bsu.coursework.PoissonSolverWithAdvancedOpression;
 import com.akasiyanik.bsu.coursework.PoissonSolverWithClarification;
 import com.akasiyanik.bsu.coursework.PoissonSolverWithOpression;
-import com.akasiyanik.bsu.coursework.PoissonSolverWithOpressionAndClarification;
 import com.akasiyanik.bsu.coursework.Solver;
 import com.akasiyanik.bsu.coursework.utils.MatrixUtils;
 import org.apache.commons.lang3.time.StopWatch;
@@ -12,7 +10,7 @@ import org.apache.commons.lang3.time.StopWatch;
 /**
  * @author Aliaksei Kasiyanik
  */
-public class DiplomaTest {
+public class DiplomaTest2 {
 
     private static double eps = Math.pow(10, -8);
     private static double tau = 0.05;
@@ -34,8 +32,8 @@ public class DiplomaTest {
             System.out.println("--- SP with CLARIFICATION ---");
             solve(new PoissonSolverWithClarification());
 
-            System.out.println("--- SP with ADVANCED PRECONDITIONING ---");
-            solve(new PoissonSolverWithAdvancedOpression());
+            System.out.println("--- SP with PRECONDITIONING ---");
+            solve(new PoissonSolverWithOpression());
 
 //        PoissonSolverWithOpressionAndClarification superSolver = new PoissonSolverWithOpressionAndClarification();
 //        superSolver.solve(t0, y0, tau, eps);
