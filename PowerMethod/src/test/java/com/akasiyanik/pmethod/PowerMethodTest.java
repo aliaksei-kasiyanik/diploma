@@ -18,10 +18,20 @@ public class PowerMethodTest extends TestCase {
         return new TestSuite(PowerMethodTest.class);
     }
 
-    public void testPowerMethod() {
-        PoissonProblem problem = new PoissonProblem(n);
-        double[][] J = problem.getJ();
-        double[] y0 = problem.getY0();
+//    public void testPowerMethod() {
+//        PoissonProblem problem = new PoissonProblem(n);
+//        double[][] J = problem.getJ();
+//        double[] y0 = problem.getY0();
+//
+//        PowerMethod powerMethod = new PowerMethod(J, y0, EPS);
+//        System.out.println(powerMethod.solve());
+//    }
+
+    public void testSimple() {
+        double[][] J = {{100, 23}, {25, 67}};
+        double[] y0 = {1.0, 1.0};
+        
+
 
         PowerMethod powerMethod = new PowerMethod(J, y0, EPS);
         System.out.println(powerMethod.solve());

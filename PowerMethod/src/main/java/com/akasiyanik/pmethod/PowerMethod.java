@@ -19,12 +19,40 @@ public class PowerMethod {
         this.eps = eps;
     }
 
-     public double solve() {
+//     public double solve() {
+//         int i = 1;
+//         double[] y_k = y0;
+//         double[] y_k_1 = norm(multiply(A, y_k));
+//         double[] y_k_2 = norm(multiply(A, y_k_1));
+//         double[] y_k_3 = norm(multiply(A, y_k_2));
+//         double[] r = r(y_k, y_k_1, y_k_2, y_k_3);
+//         boolean not_first_iteration = false;
+//         double[] new_r = new double[r.length];
+//         do {
+//             if (not_first_iteration) {
+//                 r = new_r;
+//             }
+//             y_k = y_k_1;
+//             y_k_1 = y_k_2;
+//             y_k_2 = y_k_3;
+//             y_k_3 = norm(multiply(A, y_k_2));
+//             new_r = r(y_k, y_k_1, y_k_2, y_k_3);
+//             System.out.println("iter = " + i + "; new_r = "); output(new_r);
+//             not_first_iteration = true;
+//             i++;
+//         } while (calculateMaxError(new_r, r) > eps);
+//         System.out.println("power method iter count : " + i);
+//         System.out.println("power method error : " + calculateMaxError(new_r, r));
+//         System.out.println("power method r^2 = "); output(r);
+//         return maxComponent(r);
+//     }
+
+    public double solve() {
          int i = 1;
          double[] y_k = y0;
-         double[] y_k_1 = norm(multiply(A, y_k));
-         double[] y_k_2 = norm(multiply(A, y_k_1));
-         double[] y_k_3 = norm(multiply(A, y_k_2));
+         double[] y_k_1 = multiply(A, y_k);
+         double[] y_k_2 = multiply(A, y_k_1);
+         double[] y_k_3 = multiply(A, y_k_2);
          double[] r = r(y_k, y_k_1, y_k_2, y_k_3);
          boolean not_first_iteration = false;
          double[] new_r = new double[r.length];
@@ -33,9 +61,9 @@ public class PowerMethod {
                  r = new_r;
              }
              y_k = y_k_1;
-             y_k_1 = norm(multiply(A, y_k));
-             y_k_2 = norm(multiply(A, y_k_1));
-             y_k_3 = norm(multiply(A, y_k_2));
+             y_k_1 = y_k_2;
+             y_k_2 = y_k_3;
+             y_k_3 = multiply(A, y_k_2);
              new_r = r(y_k, y_k_1, y_k_2, y_k_3);
              System.out.println("iter = " + i + "; new_r = "); output(new_r);
              not_first_iteration = true;
