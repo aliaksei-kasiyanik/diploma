@@ -16,7 +16,7 @@ public class PoissonProblem {
 
     private double[][] calculateJ() {
         double[][] J = new double[n][n];
-        double tmp = n * n ;
+        double tmp = (n + 1) * (n + 1);
         for (int i = 0; i < n; i++) {
             J[i][i] = - 2 * tmp;
             if (i < n - 1) {

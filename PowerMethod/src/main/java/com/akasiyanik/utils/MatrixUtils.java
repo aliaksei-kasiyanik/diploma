@@ -343,6 +343,13 @@ public final class MatrixUtils {
         return res;
     }
 
+    public static double[] divide(double[] y1, double l) {
+        double[] res = new double[y1.length];
+        for (int i = 0; i < y1.length; i++) {
+            res[i] = y1[i] / l;
+        }
+        return res;
+    }
 
 
     public static int getMatrixVectorCount() {

@@ -10,28 +10,34 @@ import junit.framework.TestSuite;
  */
 public class PowerMethodTest extends TestCase {
 
-    private int n = 30;
+    private int n = 17;
 
-    private static final double EPS = Math.pow(10, -6);
+    private static final double EPS = Math.pow(10, -2);
 
     public static Test suite() {
         return new TestSuite(PowerMethodTest.class);
     }
 
-//    public void testPowerMethod() {
-//        PoissonProblem problem = new PoissonProblem(n);
-//        double[][] J = problem.getJ();
-//        double[] y0 = problem.getY0();
-//
-//        PowerMethod powerMethod = new PowerMethod(J, y0, EPS);
-//        System.out.println(powerMethod.solve());
-//    }
+    public void testPowerMethod() {
+        PoissonProblem problem = new PoissonProblem(n);
+        double[][] J = problem.getJ();
+        double[] y0 = problem.getY0();
 
-    public void testSimple() {
+        PowerMethod powerMethod = new PowerMethod(J, y0, EPS);
+        System.out.println(powerMethod.solve());
+    }
+
+    public void testSimple1() {
+        double[][] J = {{100, 23}, {-25, 67}};
+        double[] y0 = {1.0, 1.0};
+
+        PowerMethod powerMethod = new PowerMethod(J, y0, EPS);
+        System.out.println(powerMethod.solve());
+    }
+
+    public void testSimple2() {
         double[][] J = {{100, 23}, {25, 67}};
         double[] y0 = {1.0, 1.0};
-        
-
 
         PowerMethod powerMethod = new PowerMethod(J, y0, EPS);
         System.out.println(powerMethod.solve());
