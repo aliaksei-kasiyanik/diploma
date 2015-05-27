@@ -29,8 +29,7 @@ public abstract class SteadyingEquation {
 
     public double getW() {
         double nu = tau * Math.abs(getJacobiMatrMaxEigenvalue(t0, y0) * getAMatrMaxEigenvalue()) - 1.0;
-        double w = 1.0 / nu * 0.7;
-        return w;
+        return 1.0 / nu * 0.7;
     }
 
     public double[] getY0() {

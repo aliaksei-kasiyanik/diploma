@@ -22,6 +22,8 @@ public class PoissonSolverWithAdvancedOpression implements Solver {
     private int iterationCountWithClarifying = 0;
     private static double eps = Math.pow(10, -6);
 
+    private static double J_MAX_EIGHENVALUE = 3834.14;
+
     public static void main(String[] args) throws FileNotFoundException {
         PoissonSolverWithAdvancedOpression solver = new PoissonSolverWithAdvancedOpression();
         double tau = 0.05;
@@ -45,9 +47,9 @@ public class PoissonSolverWithAdvancedOpression implements Solver {
         InputStream aux = null;
         InputStream coeff = null;
         try {
-            base = new FileInputStream(new File("E:\\university\\Coursework\\modules\\src\\main\\resources\\RadauIIA-3-Order-Method.txt"));
-            aux = new FileInputStream(new File("E:\\university\\Coursework\\modules\\src\\main\\resources\\9-Order-Generated-AuxMethod.txt"));
-            coeff = new FileInputStream(new File("E:\\university\\diploma\\modules\\src\\main\\resources\\opression_coefficients.txt"));
+            base = new FileInputStream(new File("/home/akasiyanik/dev/diploma/modules/src/main/resources/RadauIIA-3-Order-Method.txt"));
+            aux = new FileInputStream(new File("/home/akasiyanik/dev/diploma/modules/src/main/resources/9-Order-Generated-AuxMethod.txt"));
+            coeff = new FileInputStream(new File("/home/akasiyanik/dev/diploma/modules/src/main/resources/opression_coefficients.txt"));
 
             opressionCoeffs = FileUtils.readOpressionCoefficients(coeff);
             baseRungeKuttaMethod = FileUtils.readBaseRungeKuttaMethod(base);
@@ -96,18 +98,18 @@ public class PoissonSolverWithAdvancedOpression implements Solver {
 //            System.out.println(Y[i]);
 //        }
 
-//        System.out.println("MATRIX x VECTOR count - " + SteadyingProcessWithOpression.getMatrixVectorMultimplicationCount());
+        System.out.println("MATRIX x VECTOR count - " + SteadyingProcessWithOpression.getMatrixVectorMultimplicationCount());
 
-//        System.out.println("Solution:");
-//        for (int i = 0; i < solution.length; i++) {
-//            System.out.println(solution[i]);
-//        }
+        System.out.println("Solution:");
+        for (int i = 0; i < solution.length; i++) {
+            System.out.println(solution[i]);
+        }
 
         return solution;
     }
 
     private double getNewW(LinearSteadyingEquation steadEquation, double[] opressCoeffs) {
-        double[][] J = MatrixUtils.scalarMultipy(steadEquation.getW(), steadEquation.getJMatrix());
+        double[][] J = MatrixUtils.scalarMultipy(1.0 / J_MAX_EIGHENVALUE, steadEquation.getJMatrix());
 //        double[][]G = SteadyingProcessWithOpression.opress(steadEquation.getG(),getY0(steadEquation), opressCoeffs);
         double eps = Math.pow(10, -3);
         return Math.sqrt(new SteadyingProcessWithAndvancedConditioning.PowerMethod(steadEquation.getS(), J, getY0(steadEquation), opressCoeffs, eps).solve(steadEquation.getG()));
