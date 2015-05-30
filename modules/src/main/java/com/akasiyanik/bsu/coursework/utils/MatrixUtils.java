@@ -1,5 +1,6 @@
 package com.akasiyanik.bsu.coursework.utils;
 
+import com.sun.corba.se.spi.activation._InitialNameServiceImplBase;
 import org.apache.commons.math3.linear.*;
 
 import java.util.Arrays;
@@ -172,7 +173,7 @@ public final class MatrixUtils {
     public static double calculateMaxRelativeError(double[] apprSolution, double[] exactSolution) throws Exception {
         if (apprSolution.length != exactSolution.length) {
             throw new Exception("Solution dimensions are not matching. ApprSolution dimension = " + apprSolution.length +
-            "; ExactSolution dimension = " + exactSolution.length + ".");
+                    "; ExactSolution dimension = " + exactSolution.length + ".");
         }
 
         int dim = apprSolution.length;
@@ -201,7 +202,7 @@ public final class MatrixUtils {
             relError[i] = Math.abs(exactSolution[i] - apprSolution[i]);
         }
 
-        double max = 0;
+        double max = 0.0;
         for (int i = 0; i < dim; i++) {
             if (relError[i] > max) {
                 max = relError[i];
@@ -305,7 +306,7 @@ public final class MatrixUtils {
     }
 
     public static double maxComponent(double[] array) {
-        double max = 0.0;
+        double max = -1.0;
         for (double c : array) {
             if (Math.abs(c) > max) {
                 max = Math.abs(c);
@@ -327,6 +328,50 @@ public final class MatrixUtils {
         return res;
     }
 
+    public static void output(double[] v) {
+        System.out.print("[");
+        for (double c : v) {
+            System.out.print(c + "  ");
+        }
+        System.out.println("]");
+    }
+
+    public static double[] divide(double[] y1, double[] y2) {
+        double[] res = new double[y1.length];
+        for (int i = 0; i < y1.length; i++) {
+            res[i] = y1[i] / y2[i];
+        }
+        return res;
+    }
+
+    public static double[] divide(double[] y1, double l) {
+        double[] res = new double[y1.length];
+        for (int i = 0; i < y1.length; i++) {
+            res[i] = y1[i] / l;
+        }
+        return res;
+    }
+
+    public static double[][][] getBlocksFromDiagonalMatrix(double[][] A, int s) {
+        int blockHeight = A.length / s;
+        int blockWeidth = A[0].length / s;
+        double[][][] blocks = new double[s][][];
+        for (int i = 0; i < s; i++) {
+            blocks[i] = getBlock(i * blockHeight, i * blockWeidth, blockHeight, blockWeidth, A);
+        }
+        return blocks;
+
+    }
+
+    private static double[][] getBlock(int ii, int jj, int blockHeight, int blockWeidth, double[][] A) {
+        double[][] block = new double[blockHeight][blockWeidth];
+        for (int i = ii, i_new = 0; i < ii + blockHeight; i++, i_new++) {
+            for (int j = jj, j_new = 0; j < jj + blockWeidth; j++, j_new++) {
+                block[i_new][j_new] = A[i][j];
+            }
+        }
+        return block;
+    }
 
 
     public static int getMatrixVectorCount() {

@@ -32,7 +32,7 @@ public class PoissonProblem {
     public double[] getY0() {
         double[] y0 = new double[n];
         for (int i = 0; i < n; i++) {
-            y0[i] = 1.0;
+            y0[i] = 1.0 + i;
         }
         return y0;
     }

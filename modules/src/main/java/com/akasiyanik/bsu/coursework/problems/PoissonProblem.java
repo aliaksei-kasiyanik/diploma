@@ -31,7 +31,7 @@ public class PoissonProblem extends LinearSteadyingEquation {
 //        int n = 30;
 //        double[] res = new double[30];
         double[] res = new double[n];
-        double tmp = n * n;
+        double tmp = (n + 1) * (n + 1);
         for (int i = 0; i < n; i++) {
             res[i] += arg[i] * tmp * (- 2);
             if (i < n - 1) {
@@ -52,7 +52,7 @@ public class PoissonProblem extends LinearSteadyingEquation {
     @Override
     public double getJacobiMatrMaxEigenvalue(double t, double[] arg) {
 //        int n = 30;
-        List<Double> evs = new ArrayList<>();
+        List<Double> evs = new ArrayList<Double>();
         for (int i = 0; i < n; i++) {
             double e = -4 * Math.pow(n - 1.0, 2.0) * Math.pow(Math.sin(Math.PI * i / (2 * n + 2)), 2);
             evs.add(Math.abs(e));
@@ -70,7 +70,7 @@ public class PoissonProblem extends LinearSteadyingEquation {
     @Override
     public double[][] getJMatrix() {
         double[][] J = new double[n][n];
-        double tmp = n * n ;
+        double tmp = (n + 1) * (n + 1) ;
         for (int i = 0; i < n; i++) {
             J[i][i] = - 2 * tmp;
             if (i < n - 1) {
