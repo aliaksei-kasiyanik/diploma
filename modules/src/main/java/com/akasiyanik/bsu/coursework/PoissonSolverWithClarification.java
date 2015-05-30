@@ -66,10 +66,10 @@ public class PoissonSolverWithClarification implements Solver {
 //            System.out.println(Y[i]);
 //        }
 
-//        System.out.println("Solution:");
-//        for (int i = 0; i < solution.length; i++) {
-//            System.out.println(solution[i]);
-//        }
+        System.out.println("Solution:");
+        for (int i = 0; i < solution.length; i++) {
+            System.out.println(solution[i]);
+        }
 
         return solution;
     }

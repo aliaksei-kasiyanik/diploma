@@ -29,7 +29,7 @@ public class PoissonSolver implements Solver {
 
         double[] y0 = new double[30];
         for (int i = 0; i < 30; i++) {
-            y0[i] = 1.0;
+            y0[i] = 1.0 + i;
         }
         solver.solve(t0, y0, tau, eps);
     }

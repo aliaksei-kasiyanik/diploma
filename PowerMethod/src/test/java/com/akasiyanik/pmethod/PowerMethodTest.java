@@ -10,9 +10,9 @@ import junit.framework.TestSuite;
  */
 public class PowerMethodTest extends TestCase {
 
-    private int n = 17;
+    private int n = 21;
 
-    private static final double EPS = Math.pow(10, -2);
+    private static final double EPS = Math.pow(10, -5);
 
     public static Test suite() {
         return new TestSuite(PowerMethodTest.class);

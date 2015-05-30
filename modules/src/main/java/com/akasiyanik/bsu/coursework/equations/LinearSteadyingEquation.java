@@ -42,5 +42,15 @@ public abstract class LinearSteadyingEquation extends SteadyingEquation {
         return subtract(res, I);// tau A(x)J - I
     }
 
+//    public double[][] getG(double[][] J) {
+//        double[][] A = implicitRungeKuttaMethod.getA(); //dim: s x s
+////        double[][] J = getJMatrix(); //dim: n x n
+//
+//        double[][] res = kroneckerProduct(A, J);  //A(x)J
+//        res = scalarMultipy(tau, res);  // tau A(x)J
+//        double[][] I = getIdentityMatrix(res.length);
+//        return subtract(res, I);// tau A(x)J - I
+//    }
+
 
 }

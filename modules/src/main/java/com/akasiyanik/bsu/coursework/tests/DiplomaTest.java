@@ -21,15 +21,15 @@ public class DiplomaTest {
 
     public static void main(String[] args) {
 
-//        int[] testSizes = {30};
-        int[] testSizes = {20, 30, 50, 100, 150, 200, 300};
+        int[] testSizes = {50};
+//        int[] testSizes = {20, 30, 50, 100, 150, 200, 300};
 
         for (int n : testSizes) {
             y0 = getY0(n);
             System.out.println("-------- SIZE N = " + n + "-----------");
 
-            System.out.println("--- SP ---");
-            solve(new PoissonSolver());
+//            System.out.println("--- SP ---");
+//            solve(new PoissonSolver());
 
             System.out.println("--- SP with CLARIFICATION ---");
             solve(new PoissonSolverWithClarification());
@@ -59,7 +59,7 @@ public class DiplomaTest {
     private static double[] getY0(int n) {
         double[] y0 = new double[n];
         for (int i = 0; i < n; i++) {
-            y0[i] = 1.0;
+            y0[i] = 1.0 + i;
         }
         return y0;
     }
