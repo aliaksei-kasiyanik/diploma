@@ -442,7 +442,7 @@ d\rho\
     
   \subsection{Первый способ}
   \label{ss:precond_1}
-  Чтобы  избежать описанного в главе~\ref{s:spectral_speed} нежелательного явления, можно осуществить так называемую операцию переобусловливания \cite{gomel},\cite{konf_may}  умножив систему \eqref{system_for_solving} слева на $A^{-1}\otimes I$ (здесь $I\in \mathbb{R}^N \times \mathbb{R}^N $). Тогда система \eqref{system_for_solving} примет вид:
+  Чтобы  избежать описанного в главе~\ref{s:spectral_speed} нежелательного явления, можно осуществить операцию переобусловливания \cite{gomel},\cite{konf_may}  умножив систему \eqref{system_for_solving} слева на $A^{-1}\otimes I$ (здесь $I\in \mathbb{R}^N \times \mathbb{R}^N $). Тогда система \eqref{system_for_solving} примет вид:
 \begin{gather}\label{precond_system_for_solving}
 %\begin{aligned}
 (\tau I_s\otimes J-A^{-1}\otimes I_N)k+\tilde g=0,\\
@@ -468,9 +468,10 @@ $$\tilde \nu_{ij} = \tau \lambda_i - \frac{1}{ \mu_j}.$$
 
 Кроме вышеописанной пользы, операция переобуславливания также позволяет сократить объем вычислений, а также позволяет экономить память при хранении $\tilde G$ в виде разреженной матрицы\cite{Bondar}.
   
-  
   \subsection{Второй способ}
   \label{ss:precond_2}
+  
+  
   
   \section{Подавление компонент}
   \label{s:opress}
