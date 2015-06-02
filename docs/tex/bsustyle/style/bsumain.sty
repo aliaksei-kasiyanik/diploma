@@ -13,6 +13,9 @@
 % вызов этого пакета можно закомментировать с помощью символа
 \usepackage{cite}
 
+\usepackage{lastpage}
+\usepackage{etoolbox}
+
 \usepackage[usenames,dvipsnames]{color}
 
 \usepackage{listings}
@@ -286,6 +289,20 @@
   \vskip\belowtablecaptionskip
 }
 
+\newcounter{totfigures}
+\newcounter{tottables}
+\makeatletter
+    \AtEndDocument{%
+      \addtocounter{totfigures}{\value{figure}}%
+      \addtocounter{tottables}{\value{table}}%
+      \immediate\write\@mainaux{%
+        \string\gdef\string\totfig{\number\value{totfigures}}%
+        \string\gdef\string\tottab{\number\value{tottables}}%    
+      }%
+    }
+
+\pretocmd{\chapter}{\addtocounter{totfigures}{\value{figure}}}{}{}
+\pretocmd{\chapter}{\addtocounter{tottables}{\value{table}}}{}{}
 \makeatother%
 
 \sloppy
