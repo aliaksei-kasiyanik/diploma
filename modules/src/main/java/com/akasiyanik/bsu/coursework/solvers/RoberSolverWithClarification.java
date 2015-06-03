@@ -1,11 +1,14 @@
-package com.akasiyanik.bsu.coursework;
+package com.akasiyanik.bsu.coursework.solvers;
 
+import com.akasiyanik.bsu.coursework.HiresSolver;
+import com.akasiyanik.bsu.coursework.Solver;
 import com.akasiyanik.bsu.coursework.equations.SteadyingEquation;
 import com.akasiyanik.bsu.coursework.methods.SteadyingProcess;
-import com.akasiyanik.bsu.coursework.methods.SteadyingProcessWithOpression;
+import com.akasiyanik.bsu.coursework.methods.SteadyingProcessWithClarification;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.AuxRungeKuttaMethod;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.RungeKuttaMethod;
 import com.akasiyanik.bsu.coursework.problems.HiresProblem;
+import com.akasiyanik.bsu.coursework.problems.RoberProblem;
 import com.akasiyanik.bsu.coursework.utils.FileUtils;
 
 import java.io.File;
@@ -14,60 +17,51 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 /**
- * @author: akasiyanik
+ * @author Aliaksei Kasiyanik
  */
-public class HiresSolverWithOpression implements Solver {
+public class RoberSolverWithClarification implements Solver {
 
     private int iterationCount = 0;
     private int iterationCountWithClarifying = 0;
 
     public static void main(String[] args) throws FileNotFoundException {
-        HiresSolverWithOpression solver = new HiresSolverWithOpression();
+        RoberSolverWithClarification solver = new RoberSolverWithClarification();
         double tau = 0.05;
         double t0 = 0.0;
 
-        double[] y0 = new double[8];
+        double[] y0 = new double[3];
         y0[0] = 1.0;
-        for (int i = 1; i < 7; i++){
-            y0[i] = 0.0;
-        }
-        y0[7] = 0.0057;
-        solver.solve(t0, y0, tau, Math.pow(10, -6));
+        y0[1] = 0.0;
+        y0[2] = 0.0;
+        solver.solve(t0, y0, tau, Math.pow(10, -3));
     }
 
     public double[] solve(double t0, double[] y0, double tau, double eps) {
         RungeKuttaMethod baseRungeKuttaMethod = null;
         AuxRungeKuttaMethod auxRungeKuttaMethod = null;
-        InputStream coeff = null;
-
-        double[] opressionCoeffs = null;
         try {
-            InputStream base = new FileInputStream(new File("E:\\university\\Coursework\\modules\\src\\main\\resources\\RadauIIA-3-Order-Method.txt"));
-            InputStream aux = new FileInputStream(new File("E:\\university\\Coursework\\modules\\src\\main\\resources\\9-Order-Generated-AuxMethod.txt"));
-            coeff = new FileInputStream(new File("E:\\university\\diploma\\modules\\src\\main\\resources\\opression_coefficients.txt"));
-
+            InputStream base = new FileInputStream(new File("E:\\university\\diploma\\modules\\src\\main\\resources\\RadauIIA-3-Order-Method.txt"));
+            InputStream aux = new FileInputStream(new File("E:\\university\\diploma\\modules\\src\\main\\resources\\9-Order-Generated-AuxMethod.txt"));
 
             baseRungeKuttaMethod = FileUtils.readBaseRungeKuttaMethod(base);
             auxRungeKuttaMethod = FileUtils.readAuxRungeKuttaMethod(aux);
-            opressionCoeffs = FileUtils.readOpressionCoefficients(coeff);
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        SteadyingEquation steadyingEquation = new HiresProblem(tau, t0, y0, baseRungeKuttaMethod);
+        SteadyingEquation steadyingEquation = new RoberProblem(tau, t0, y0, baseRungeKuttaMethod);
 
 //        double eps = Math.pow(10, -5);
         double w = steadyingEquation.getW();
         setIterationCount(0);
-        setIterationCountWithClarifying(0);
-//        System.out.println("w = " + w);
+//        setIterationCountWithClarifying(0);
+        System.out.println("w = " + w);
 
-        SteadyingProcess steadyingProcess = new SteadyingProcessWithOpression(auxRungeKuttaMethod, eps, w, steadyingEquation, opressionCoeffs);
+        SteadyingProcess steadyingProcess = new SteadyingProcessWithClarification(auxRungeKuttaMethod, eps, w, steadyingEquation);
         double[] Y = steadyingProcess.getY();
 
         setIterationCount(steadyingProcess.getIterationCount());
-//        setIterationCountWithClarifying(steadyingProcess.getIterationCountWithClarifying());
+        setIterationCountWithClarifying(steadyingProcess.getIterationCountWithClarifying());
 
         double[] solution = steadyingEquation.getSolution(Y);
 
@@ -100,4 +94,3 @@ public class HiresSolverWithOpression implements Solver {
         this.iterationCountWithClarifying = iterationCountWithClarifying;
     }
 }
-

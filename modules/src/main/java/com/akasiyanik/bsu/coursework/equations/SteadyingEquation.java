@@ -6,7 +6,7 @@ import static com.akasiyanik.bsu.coursework.utils.MatrixUtils.subtract;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.RungeKuttaMethod;
 
 /**
- * @author: akasiyanik
+ * @author akasiyanik
  */
 public abstract class SteadyingEquation {
 
@@ -28,7 +28,7 @@ public abstract class SteadyingEquation {
     public abstract double[][] getG();
 
     public double getW() {
-        double nu = tau * Math.abs(getJacobiMatrMaxEigenvalue(t0, y0) * getAMatrMaxEigenvalue()) - 1.0;
+        double nu = tau * Math.abs(getJacobiMatrMaxEigenvalue(t0, y0) * getAMatrMaxEigenvalue()) + 1.0;
         return 1.0 / nu * 0.7;
     }
 
