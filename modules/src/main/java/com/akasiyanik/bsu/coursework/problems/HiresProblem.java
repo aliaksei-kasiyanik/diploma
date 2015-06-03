@@ -16,43 +16,19 @@ public class HiresProblem extends SteadyingEquation {
         super(tau, t0, y0, implMethod);
     }
 
-//    public static void main(String[] args) {
-//        double t = 1;
-//        double[] arg = new double[30];
-//        for (int i = 0; i < 30; i++) {
-//            arg[i] = 1.0;
-//        }
-//
-//        double f[] = .f(t, arg);
-//
-//    }
-
-
-    @Override
-    public double[][] getG() {
-        return new double[0][];
-    }
-
     @Override
     public double[] f(double t, double[] arg) {
-//        int n = 30;
-//        double[] res = new double[30];
-//        for (int i = 0; i < n; i++) {
-//
-//        }
+        double f0 = -1.71 * arg[0] + 0.43 * arg[1] + 8.32 * arg[2] + 0.0007;
+        double f1 = 1.71 * arg[0] - 8.75 * arg[1];
+        double f2 = -10.03 * arg[2] + 0.43 * arg[3] + 0.035 * arg[4];
+        double f3 = 8.32 * arg[1] + 1.71 * arg[2] - 1.12 * arg[3];
+        double f4 = -1.745 * arg[4] + 0.43 * arg[5] + 0.43 * arg[6];
+        double f5 = -280 * arg[5] * arg[7] + 0.69 * arg[3] + 1.71 * arg[4] - 0.43 * arg[5] + 0.69 * arg[6];
+        double f6 = 280 * arg[5] * arg[7] - 1.81 * arg[6];
+        double f7 = -280 * arg[5] * arg[7] + 1.81 * arg[6];
 
-
-            double f0 = -1.71 * arg[0] + 0.43 * arg[1] + 8.32 * arg[2] + 0.0007;
-            double f1 = 1.71 * arg[0] - 8.75 * arg[1];
-            double f2 = -10.03 * arg[2] + 0.43 * arg[3] + 0.035 * arg[4];
-            double f3 = 8.32 * arg[1] + 1.71 * arg[2] - 1.12 * arg[3];
-            double f4 = -1.745 * arg[4] + 0.43 * arg[5] + 0.43 * arg[6];
-            double f5 = -280 * arg[5] * arg[7] + 0.69 * arg[3] + 1.71 * arg[4] - 0.43 * arg[5] + 0.69 * arg[6];
-            double f6 = 280 * arg[5] * arg[7] - 1.81 * arg[6];
-            double f7 = -280 * arg[5] * arg[7] + 1.81 * arg[6];
-
-            double[] res = {f0, f1, f2, f3, f4, f5, f6, f7};
-            return res;
+        double[] res = {f0, f1, f2, f3, f4, f5, f6, f7};
+        return res;
     }
 
     @Override
@@ -72,8 +48,8 @@ public class HiresProblem extends SteadyingEquation {
         m[6] = 280. * arg[7] + 1.81 + 280. * arg[5];
         m[7] = 280. * arg[7] + 1.81 + 280. * arg[5];
 
-        double max_j = 0.0;
-        for (int i = 0; i < 8; i++)
+        double max_j = m[0];
+        for (int i = 1; i < 8; i++)
             if (m[i] > max_j)
                 max_j = m[i];
 
@@ -84,6 +60,12 @@ public class HiresProblem extends SteadyingEquation {
 
     @Override
     public double getAMatrMaxEigenvalue() {
-        return 0.3333333;
+//        return 0.3333333;//Radau - 3
+        return 0.2748888295956;//Radau - 5
+    }
+
+    @Override
+    public double[][] getG() {
+        return new double[0][];
     }
 }

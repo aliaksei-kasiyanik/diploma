@@ -50,13 +50,13 @@ public class SteadyingProcess {
             Y = Y1;
             iterationCount++;
         } while (err >= EPS);
-        System.out.println("iteration count into st. process - " + iterationCount);
+//        System.out.println("iteration count into st. process - " + iterationCount);
 
         return Y;
     }
 
     private double[] doSimpleSteadyingIteration(double[] Y) {
-       return F(Y);
+        return F(Y);
     }
 
 
@@ -112,7 +112,7 @@ public class SteadyingProcess {
         this.iterationCountWithClarifying = iterationCountWithClarifying;
     }
 
-    //    private double[][] calculateK(double[] Y) {
+//    private double[][] calculateK(double[] Y) {
 //        int sigma = auxMethod.getS();
 //        int n = steadyingEquation.getN();
 //        int s = steadyingEquation.getS();

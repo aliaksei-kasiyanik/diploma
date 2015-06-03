@@ -55,7 +55,7 @@ public class PoissonSolver implements Solver {
         SteadyingProcess steadyingProcess = new SteadyingProcess(auxRungeKuttaMethod, eps, w, steadyingEquation);
         double[] Y = steadyingProcess.getY();
 
-        setIterationCountWithClarifying(steadyingProcess.getIterationCountWithClarifying());
+        setIterationCount(steadyingProcess.getIterationCount());
 
         double[] solution = steadyingEquation.getSolution(Y);
 
