@@ -212,17 +212,6 @@ public class SteadyingProcessWithAndvancedConditioning extends SteadyingProcess 
             return flatten(commonRes);
         }
 
-        public static double[] opress(double[][] A, double[] r0, double[] coeffs) {
-            int coeffNumber = coeffs.length;
-            double[] res = new double[r0.length];
-            double[] tmp = new double[r0.length];
-            for (int i = coeffNumber - 1; i >= 0; i--) {
-                tmp = add(res, scalarMultipy(coeffs[i], r0));
-                res = multiply(A, tmp);
-                matrixVectorMultimplicationCount++;
-            }
-            return tmp;
-        }
 
     }
 }

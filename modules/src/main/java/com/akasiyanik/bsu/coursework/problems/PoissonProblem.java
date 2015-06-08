@@ -2,6 +2,7 @@ package com.akasiyanik.bsu.coursework.problems;
 
 import com.akasiyanik.bsu.coursework.equations.LinearSteadyingEquation;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.RungeKuttaMethod;
+import com.akasiyanik.bsu.coursework.utils.MatrixUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,18 +31,20 @@ public class PoissonProblem extends LinearSteadyingEquation {
     public double[] f(double t, double[] arg) {
 //        int n = 30;
 //        double[] res = new double[30];
-        double[] res = new double[n];
-        double tmp = (n + 1) * (n + 1);
-        for (int i = 0; i < n; i++) {
-            res[i] += arg[i] * tmp * (- 2);
-            if (i < n - 1) {
-                res[i] += arg[i + 1] * tmp;
-            }
-            if (i > 0) {
-                res[i] += arg[i - 1] * tmp;
-            }
-        }
-        return res;
+//        double[] res = new double[n];
+//        double tmp = (n + 1) * (n + 1);
+//        for (int i = 0; i < n; i++) {
+//            res[i] += arg[i] * tmp * (- 2);
+//            if (i < n - 1) {
+//                res[i] += arg[i + 1] * tmp;
+//            }
+//            if (i > 0) {
+//                res[i] += arg[i - 1] * tmp;
+//            }
+//        }
+//        return res;
+        double[][] J = getJMatrix();
+        return MatrixUtils.multiply(J, arg);
     }
 
     @Override

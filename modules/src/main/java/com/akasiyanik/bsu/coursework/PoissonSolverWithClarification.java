@@ -26,9 +26,10 @@ public class PoissonSolverWithClarification implements Solver {
         PoissonSolverWithClarification solver = new PoissonSolverWithClarification();
         double tau = 0.05;
         double t0 = 0.0;
+        int n = 20;
 
-        double[] y0 = new double[20];
-        for (int i = 0; i < 20; i++) {
+        double[] y0 = new double[n];
+        for (int i = 0; i < n; i++) {
             y0[i] = 1.0 + i;
         }
         solver.solve(t0, y0, tau, eps);
@@ -38,8 +39,8 @@ public class PoissonSolverWithClarification implements Solver {
         RungeKuttaMethod baseRungeKuttaMethod = null;
         AuxRungeKuttaMethod auxRungeKuttaMethod = null;
         try {
-            InputStream base = new FileInputStream(new File("E:\\university\\Coursework\\modules\\src\\main\\resources\\RadauIIA-3-Order-Method.txt"));
-            InputStream aux = new FileInputStream(new File("E:\\university\\Coursework\\modules\\src\\main\\resources\\9-Order-Generated-AuxMethod.txt"));
+            InputStream base = new FileInputStream(new File("E:\\university\\diploma\\modules\\src\\main\\resources\\RadauIIA-5-Order-Method.txt"));
+            InputStream aux = new FileInputStream(new File("E:\\university\\diploma\\modules\\src\\main\\resources\\9-Order-Generated-AuxMethod.txt"));
 
             baseRungeKuttaMethod = FileUtils.readBaseRungeKuttaMethod(base);
             auxRungeKuttaMethod = FileUtils.readAuxRungeKuttaMethod(aux);
@@ -69,10 +70,10 @@ public class PoissonSolverWithClarification implements Solver {
 //            System.out.println(Y[i]);
 //        }
 
-//        System.out.println("Solution:");
-//        for (int i = 0; i < solution.length; i++) {
-//            System.out.println(solution[i]);
-//        }
+        System.out.println("Solution:");
+        for (int i = 0; i < solution.length; i++) {
+            System.out.println(solution[i]);
+        }
 
         return solution;
     }

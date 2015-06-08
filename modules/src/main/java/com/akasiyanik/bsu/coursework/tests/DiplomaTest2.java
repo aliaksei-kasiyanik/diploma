@@ -12,7 +12,7 @@ import org.apache.commons.lang3.time.StopWatch;
  */
 public class DiplomaTest2 {
 
-    private static double eps = Math.pow(10, -8);
+    private static double eps = Math.pow(10, -6);
     private static double tau = 0.05;
     private static double t0 = 0.0;
     private static double[] y0;

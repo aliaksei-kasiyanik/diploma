@@ -29,10 +29,10 @@ public final class MatrixUtils {
         return kroneckerProduct(a, b).getData();
     }
 
-    public static double[][] kroneckerProduct(double[][] arg1, double[] arg2) {
+    public static double[] kroneckerProduct(double[][] arg1, double[] arg2) {
         RealMatrix a = new Array2DRowRealMatrix(arg1);
         RealMatrix b = new Array2DRowRealMatrix(arg2);
-        return kroneckerProduct(a, b).getData();
+        return kroneckerProduct(a, b).getColumn(0);
     }
 
     public static double[] kroneckerProduct(double[] arg1, double[] arg2) {
@@ -371,6 +371,14 @@ public final class MatrixUtils {
             }
         }
         return block;
+    }
+
+    public static double[] abs(double[] a) {
+        double[] res = new double[a.length];
+        for (int i = 0; i < a.length; i++) {
+            res[i] = Math.abs(a[i]);
+        }
+        return res;
     }
 
 

@@ -27,8 +27,12 @@ public abstract class SteadyingEquation {
 
     public abstract double[][] getG();
 
+    public RungeKuttaMethod getImplicitRungeKuttaMethod() {
+        return implicitRungeKuttaMethod;
+    }
+
     public double getW() {
-        double nu = tau * Math.abs(getJacobiMatrMaxEigenvalue(t0, y0) * getAMatrMaxEigenvalue()) + 1.0;
+        double nu = tau * Math.abs(getJacobiMatrMaxEigenvalue(t0, y0) * getAMatrMaxEigenvalue() - 1.0);
         return 1.0 / nu * 0.7;
     }
 
@@ -128,4 +132,11 @@ public abstract class SteadyingEquation {
         this.t0 = t0;
     }
 
+    public double getTau() {
+        return tau;
+    }
+
+    public void setTau(double tau) {
+        this.tau = tau;
+    }
 }

@@ -6,6 +6,8 @@ import com.akasiyanik.bsu.coursework.equations.SteadyingEquation;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.AuxRungeKuttaMethod;
 import com.akasiyanik.bsu.coursework.utils.MatrixUtils;
 
+import java.util.Locale;
+
 /**
  * @author: akasiyanik
  */
@@ -47,6 +49,8 @@ public class SteadyingProcess {
             double[] Y1 = doSimpleSteadyingIteration(Y);
             err = calculateErr(Y, Y1);
 //            System.out.println("POST In method Err = " + err);
+//            System.out.printf(Locale.ENGLISH, "%.9f,", MatrixUtils.maxComponent(steadyingEquation.r(Y)));
+//            System.out.println();
             Y = Y1;
             iterationCount++;
         } while (err >= EPS);

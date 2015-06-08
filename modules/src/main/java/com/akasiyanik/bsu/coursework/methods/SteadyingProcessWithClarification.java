@@ -4,13 +4,15 @@ import com.akasiyanik.bsu.coursework.equations.SteadyingEquation;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.AuxRungeKuttaMethod;
 import com.akasiyanik.bsu.coursework.utils.MatrixUtils;
 
+import java.util.Locale;
+
 
 /**
  * @author akasiyanik
  */
 public class SteadyingProcessWithClarification extends SteadyingProcess {
 
-    public final static int CLARIFICATION_ITERATION = 50;
+    public final static int CLARIFICATION_ITERATION = 1;
     public SteadyingProcessWithClarification(AuxRungeKuttaMethod auxMethod, double EPS, double w, SteadyingEquation steadyingEquation) {
         super(auxMethod, EPS, w, steadyingEquation);
     }
@@ -42,6 +44,8 @@ public class SteadyingProcessWithClarification extends SteadyingProcess {
             }
             //SOUT: ||r||
 //            System.out.println(MatrixUtils.maxComponent(steadyingEquation.r(Y)));
+//            System.out.printf(Locale.ENGLISH, "%.9f,", MatrixUtils.maxComponent(steadyingEquation.r(Y1)));
+//            System.out.println();
             err = calculateErr(Y, Y1);
 //            System.out.println("POST In method Err = " + err);
             Y = Y1;

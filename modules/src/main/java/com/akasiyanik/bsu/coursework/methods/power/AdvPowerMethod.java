@@ -1,5 +1,8 @@
 package com.akasiyanik.bsu.coursework.methods.power;
 
+import com.akasiyanik.bsu.coursework.methods.SteadyingProcessWithAndvancedConditioning;
+import com.akasiyanik.bsu.coursework.utils.MatrixUtils;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -100,7 +103,7 @@ public class AdvPowerMethod {
         double[] y_k_1 = multiply(A, y_k);
         double[] y_k_2 = multiply(A, y_k_1);
         double[] y_k_3 = multiply(A, y_k_2);
-        double[] r = r(y_k, y_k_1, y_k_2, y_k_3);
+        double r = r(y_k, y_k_1, y_k_2, y_k_3);
         double lambda = calculateRealEigenvalue(y_k_1, y_k_3);
         //---- Norm --
 //        y_k_1 = divide(y_k_1, getNorm(y_k_1));
@@ -109,7 +112,7 @@ public class AdvPowerMethod {
         //------------
 
         boolean not_first_iteration = false;
-        double[] new_r = new double[r.length];
+        double new_r = 0.0;
         double new_lambda = 0.0;
         do {
             if (not_first_iteration) {
@@ -125,18 +128,18 @@ public class AdvPowerMethod {
             //---- Norm --
 //             y_k_3 = divide(y_k_3, getNorm(y_k_3));
             //------------
-//            System.out.println("iter = " + i + "; new_r = ");
+//            System.out.println("iter = " + i + "; new_r = " + new_r);
 //            output(new_r);
 //            System.out.println("iter = " + i + "; new_lambda = " + new_lambda);
             not_first_iteration = true;
             i++;
         } while (checkComplexConvergence(new_r, r) || checkRealConvergence(lambda, new_lambda));
-        System.out.println("power method iter count : " + i);
-        System.out.println("power method error : " + calculateMaxError(new_r, r));
-        System.out.println("power method r^2 = ");
-        output(r);
+//        System.out.println("power method iter count : " + i);
+//        System.out.println("power method error : " + calculateMaxError(new_r, r));
+//        System.out.println("power method r^2 = " + r);
+//        output(r);
 
-        double complexEigenvalue = Math.sqrt(maxComponent(r));
+        double complexEigenvalue = Math.sqrt(Math.abs(r));
         double realEigenvalue = new_lambda;
         System.out.println("Complex: " + complexEigenvalue);
         System.out.println("Real: " + realEigenvalue);
@@ -149,7 +152,7 @@ public class AdvPowerMethod {
         double[] y_k_1 = multiply(A, y_k);
         double[] y_k_2 = multiply(A, y_k_1);
         double[] y_k_3 = multiply(A, y_k_2);
-        double[] r = r(y_k, y_k_1, y_k_2, y_k_3);
+        double r = r(y_k, y_k_1, y_k_2, y_k_3);
         double lambda = calculateRealEigenvalue(y_k_1, y_k_3);
         //---- Norm --
 //        y_k_1 = divide(y_k_1, getNorm(y_k_1));
@@ -158,7 +161,7 @@ public class AdvPowerMethod {
         //------------
 
         boolean not_first_iteration = false;
-        double[] new_r = new double[r.length];
+        double new_r = 0.0;
         double new_lambda = 0.0;
         do {
             if (not_first_iteration) {
@@ -174,18 +177,18 @@ public class AdvPowerMethod {
             //---- Norm --
 //             y_k_3 = divide(y_k_3, getNorm(y_k_3));
             //------------
-//            System.out.println("iter = " + i + "; new_r = ");
+//            System.out.println("iter = " + i + "; new_r = " + new_r );
 //            output(new_r);
 //            System.out.println("iter = " + i + "; new_lambda = " + new_lambda);
             not_first_iteration = true;
             i++;
         } while (checkComplexConvergence(new_r, r) || checkRealConvergence(lambda, new_lambda));
-        System.out.println("power method iter count : " + i);
-        System.out.println("power method error : " + calculateMaxError(new_r, r));
-        System.out.println("power method r^2 = ");
-        output(r);
+//        System.out.println("power method iter count : " + i);
+//        System.out.println("power method error : " + calculateMaxError(new_r, r));
+//        System.out.println("power method r^2 = ");
+//        output(r);
 
-        double complexEigenvalue = Math.sqrt(maxComponent(r));
+        double complexEigenvalue = Math.sqrt(Math.abs(r));
         double realEigenvalue = new_lambda;
         System.out.println("Complex: " + complexEigenvalue);
         System.out.println("Real: " + realEigenvalue);
@@ -193,21 +196,22 @@ public class AdvPowerMethod {
     }
 
     protected double[] cond(double[][] A, double[] r0) {
-        int coeffNumber = coeffs.length;
-        double[][] commonRes = new double[s][];
-        double[][] splittedR0 = split(r0, s);
-//            double[][][] A_blocks = getBlocksFromDiagonalMatrix(A, s);
-        for (int j = 0; j < s; j++) {
-            double[] tmp = new double[r0.length / s];
-            double[] res = new double[r0.length / s];
-            for (int i = coeffNumber - 1; i >= 0; i--) {
-                tmp = add(res, scalarMultipy(coeffs[i], splittedR0[j]));
-                res = multiply(A, tmp);
-//                matrixVectorMultimplicationCount++;
-            }
-            commonRes[j] = tmp;
-        }
-        return flatten(commonRes);
+        return SteadyingProcessWithAndvancedConditioning.advancedOpress(s, A, r0, coeffs);
+//        int coeffNumber = coeffs.length;
+//        double[][] commonRes = new double[s][];
+//        double[][] splittedR0 = split(r0, s);
+////            double[][][] A_blocks = getBlocksFromDiagonalMatrix(A, s);
+//        for (int j = 0; j < s; j++) {
+//            double[] tmp = new double[r0.length / s];
+//            double[] res = new double[r0.length / s];
+//            for (int i = coeffNumber - 1; i >= 0; i--) {
+//                tmp = add(res, scalarMultipy(coeffs[i], splittedR0[j]));
+//                res = multiply(A, tmp);
+////                matrixVectorMultimplicationCount++;
+//            }
+//            commonRes[j] = tmp;
+//        }
+//        return flatten(commonRes);
     }
 
     private boolean checkRealConvergence(double lambda, double new_lambda) {
@@ -215,12 +219,27 @@ public class AdvPowerMethod {
         if (Double.isNaN(tmp) || Double.isInfinite(tmp)) {
             return false;
         } else {
-            return Math.abs((Math.abs(lambda) - Math.abs(new_lambda))) > eps;
+            return Math.abs(lambda - new_lambda) > eps;
         }
     }
 
     private boolean checkComplexConvergence(double[] new_r, double[] r) {
-        double tmp = calculateMaxError(new_r, r);
+        double tmp = MatrixUtils.getMedianWithoutZeros(MatrixUtils.abs(MatrixUtils.subtract(new_r, r)));
+        System.out.println("median " + tmp);
+//        double tmp = Math.abs(new_r[0] - r[0]);
+//        double tmp = calculateMaxError(new_r, r);
+        if (Double.isNaN(tmp) || Double.isInfinite(tmp)) {
+            return false;
+        } else {
+            return tmp > eps;
+        }
+    }
+
+    private boolean checkComplexConvergence(double new_r, double r) {
+        double tmp = Math.abs(new_r - r);
+//        System.out.println("norm r " + tmp);
+//        double tmp = Math.abs(new_r[0] - r[0]);
+//        double tmp = calculateMaxError(new_r, r);
         if (Double.isNaN(tmp) || Double.isInfinite(tmp)) {
             return false;
         } else {
@@ -247,20 +266,33 @@ public class AdvPowerMethod {
         return Math.sqrt(getAverage(divide(y_k_3, y_k_1)));
     }
 
-    private double[] r(double[] y_k__1, double[] y_k, double[] y_k_1, double[] y_k_2) {
-        double r[] = new double[y_k__1.length];
+//    private double[] r(double[] y_k__1, double[] y_k, double[] y_k_1, double[] y_k_2) {
+//        double r[] = new double[y_k__1.length];
+//        for (int i = 0; i < y_k__1.length; i++) {
+//            double y__1 = y_k__1[i];
+//            double y_0 = y_k[i];
+//            double y_1 = y_k_1[i];
+//            double y_2 = y_k_2[i];
+//            if ((y__1 * y_1 - Math.pow(y_0, 2)) == 0.0) {
+//                r[i] = 0.0;
+//            } else {
+//                r[i] = (y_0 * y_2 - Math.pow(y_1, 2)) / (y__1 * y_1 - Math.pow(y_0, 2));
+//            }
+//        }
+//        return r;
+//    }
+
+    private double r(double[] y_k__1, double[] y_k, double[] y_k_1, double[] y_k_2) {
         for (int i = 0; i < y_k__1.length; i++) {
             double y__1 = y_k__1[i];
             double y_0 = y_k[i];
             double y_1 = y_k_1[i];
             double y_2 = y_k_2[i];
-            if ((y__1 * y_1 - Math.pow(y_0, 2)) == 0.0) {
-                r[i] = 0.0;
-            } else {
-                r[i] = (y_0 * y_2 - Math.pow(y_1, 2)) / (y__1 * y_1 - Math.pow(y_0, 2));
+            if ((y__1 * y_1 - Math.pow(y_0, 2)) != 0.0) {
+               return (y_0 * y_2 - Math.pow(y_1, 2)) / (y__1 * y_1 - Math.pow(y_0, 2));
             }
         }
-        return r;
+        return 0.0 ;
     }
 
     private double[] normalize(double[] y) {

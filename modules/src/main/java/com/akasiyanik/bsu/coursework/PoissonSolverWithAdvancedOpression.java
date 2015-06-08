@@ -45,7 +45,7 @@ public class PoissonSolverWithAdvancedOpression implements Solver {
         InputStream aux = null;
         InputStream coeff = null;
         try {
-            base = new FileInputStream(new File("E:\\university\\diploma\\modules\\src\\main\\resources\\RadauIIA-3-Order-Method.txt"));
+            base = new FileInputStream(new File("E:\\university\\diploma\\modules\\src\\main\\resources\\RadauIIA-5-Order-Method.txt"));
             aux = new FileInputStream(new File("E:\\university\\diploma\\modules\\src\\main\\resources\\9-Order-Generated-AuxMethod.txt"));
             coeff = new FileInputStream(new File("E:\\university\\diploma\\modules\\src\\main\\resources\\opression_coefficients.txt"));
 
@@ -72,15 +72,19 @@ public class PoissonSolverWithAdvancedOpression implements Solver {
         }
 
         LinearSteadyingEquation steadyingEquation = new PoissonProblem(tau, t0, y0, baseRungeKuttaMethod);
-        double JEigenvalue = new SteadyingProcessWithAndvancedConditioning.PowerMethod(steadyingEquation.getS(), steadyingEquation.getJMatrix(), steadyingEquation.getY0(), opressionCoeffs, eps).solve();
+        double JEigenvalue =  steadyingEquation.getJacobiMatrMaxEigenvalue(0.0, null);
+//        double JEigenvalue = new AdvPowerMethod(steadyingEquation.getS(), steadyingEquation.getJMatrix(), steadyingEquation.getY0(), opressionCoeffs, eps).solve();
+        System.out.println("JEigenvalue " + JEigenvalue);
 
 
         double w = - 0.7 / getNewW(steadyingEquation, opressionCoeffs, JEigenvalue);
+        System.out.println("newW " + w);
         setIterationCount(0);
 
         SteadyingProcessWithAndvancedConditioning steadyingProcess = new SteadyingProcessWithAndvancedConditioning(auxRungeKuttaMethod, eps, w, steadyingEquation, opressionCoeffs, JEigenvalue);
         double[] Y = steadyingProcess.getY();
 
+        setIterationCount(steadyingProcess.getIterationCount());
         setIterationCountWithClarifying(steadyingProcess.getIterationCountWithClarifying());
 
         double[] solution = steadyingEquation.getSolution(Y);
@@ -104,11 +108,11 @@ public class PoissonSolverWithAdvancedOpression implements Solver {
 
     private double getNewW(LinearSteadyingEquation steadEquation, double[] opressCoeffs, double j_eighen) {
         double[][] J = steadEquation.getJMatrix();
-        double eps = Math.pow(10, -1);
+        double eps = Math.pow(10, -3);
         double[][] J_norm = MatrixUtils.scalarMultipy(1.0 / j_eighen, J);
 //        double[][] G = MatrixUtils.scalarMultipy(steadEquation.getW(), steadEquation.getG());
+//        return new AdvPowerMethod(steadEquation.getS(), G, getY0(steadEquation), opressCoeffs, eps).solve(J_norm);
         return new AdvPowerMethod(steadEquation.getS(), steadEquation.getG(), getY0(steadEquation), opressCoeffs, eps).solve(J_norm);
-//        double[][] G = MatrixUtils.scalarMultipy(steadEquation.getW(), steadEquation.getG());
 
     }
 
