@@ -1,4 +1,4 @@
 # diploma
 
 PDF version (Russian):
-https://github.com/aliaksei-kasiyanik/diploma/blob/predond-phase-2/docs/tex/diploma.pdf
+https://github.com/aliaksei-kasiyanik/diploma/blob/master/docs/tex/diploma.pdf
