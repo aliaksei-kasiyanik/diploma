@@ -1,6 +1,5 @@
 package com.akasiyanik.bsu.coursework;
 
-import com.akasiyanik.bsu.coursework.equations.SteadyingEquation;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.AuxRungeKuttaMethod;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.RungeKuttaMethod;
 import com.akasiyanik.bsu.coursework.methods.SteadyingProcess;
@@ -31,7 +30,7 @@ public class HiresSolver implements Solver {
             y0[i] = 0.0;
         }
         y0[7] = 0.0057;
-        solver.solve(t0, y0, tau, Math.pow(10, -6));
+        solver.solve(t0, y0, tau, Math.pow(10, -10));
     }
 
     public double[] solve(double t0, double[] y0, double tau, double eps) {
@@ -47,7 +46,7 @@ public class HiresSolver implements Solver {
             e.printStackTrace();
         }
 
-        SteadyingEquation steadyingEquation = new HiresProblem(tau, t0, y0, baseRungeKuttaMethod);
+        HiresProblem steadyingEquation = new HiresProblem(tau, t0, y0, baseRungeKuttaMethod);
 
 //        double eps = Math.pow(10, -5);
         double w = steadyingEquation.getW();
@@ -72,6 +71,8 @@ public class HiresSolver implements Solver {
         for (int i = 0; i < solution.length; i++) {
             System.out.println(solution[i]);
         }
+
+        System.out.println("ITERATION COUNT: "  + getIterationCount());
 
         return solution;
     }

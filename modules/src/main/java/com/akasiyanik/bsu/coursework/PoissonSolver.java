@@ -29,7 +29,7 @@ public class PoissonSolver implements Solver {
 
         double[] y0 = new double[30];
         for (int i = 0; i < 30; i++) {
-            y0[i] = 1.0;
+            y0[i] = 1.0 + i;
         }
         solver.solve(t0, y0, tau, eps);
     }
@@ -38,7 +38,7 @@ public class PoissonSolver implements Solver {
         RungeKuttaMethod baseRungeKuttaMethod = null;
         AuxRungeKuttaMethod auxRungeKuttaMethod = null;
         try {
-            InputStream base = new FileInputStream(new File("E:\\university\\Coursework\\modules\\src\\main\\resources\\RadauIIA-3-Order-Method.txt"));
+            InputStream base = new FileInputStream(new File("E:\\university\\diploma\\modules\\src\\main\\resources\\RadauIIA-5-Order-Method.txt"));
             InputStream aux = new FileInputStream(new File("E:\\university\\Coursework\\modules\\src\\main\\resources\\9-Order-Generated-AuxMethod.txt"));
 
             baseRungeKuttaMethod = FileUtils.readBaseRungeKuttaMethod(base);
@@ -51,11 +51,14 @@ public class PoissonSolver implements Solver {
 
         double w = steadyingEquation.getW();
         setIterationCount(0);
+//        setIterationCountWithClarifying(0);
 
         SteadyingProcess steadyingProcess = new SteadyingProcess(auxRungeKuttaMethod, eps, w, steadyingEquation);
         double[] Y = steadyingProcess.getY();
 
-        setIterationCountWithClarifying(steadyingProcess.getIterationCountWithClarifying());
+        setIterationCount(steadyingProcess.getIterationCount());
+        System.out.println("TOTAL ITER:" + steadyingProcess.getIterationCount());
+//        System.out.println("CLAR ITER:" + steadyingProcess.getIterationCountWithClarifying());
 
         double[] solution = steadyingEquation.getSolution(Y);
 
@@ -66,10 +69,10 @@ public class PoissonSolver implements Solver {
 //            System.out.println(Y[i]);
 //        }
 
-//        System.out.println("Solution:");
-//        for (int i = 0; i < solution.length; i++) {
-//            System.out.println(solution[i]);
-//        }
+        System.out.println("Solution:");
+        for (int i = 0; i < solution.length; i++) {
+            System.out.println(solution[i]);
+        }
 
         return solution;
     }

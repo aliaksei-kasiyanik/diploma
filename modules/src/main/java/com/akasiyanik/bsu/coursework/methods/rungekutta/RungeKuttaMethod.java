@@ -52,6 +52,14 @@ public class RungeKuttaMethod {
 
     // Getters and Setters
 
+    public double[][] getInverseA() {
+        double[][] a = {{3.2247448713915894,
+        1.167840084690405, -0.25319726474218074}, {-3.5678400846904053,
+            0.7752551286084115,
+            1.0531972647421806}, {5.53197264742181, -7.53197264742181,
+            5.000000000000001}};
+        return a;
+    }
 
     public int getS() {
         return s;

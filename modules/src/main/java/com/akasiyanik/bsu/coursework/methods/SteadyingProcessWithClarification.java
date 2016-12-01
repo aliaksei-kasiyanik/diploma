@@ -4,12 +4,15 @@ import com.akasiyanik.bsu.coursework.equations.SteadyingEquation;
 import com.akasiyanik.bsu.coursework.methods.rungekutta.AuxRungeKuttaMethod;
 import com.akasiyanik.bsu.coursework.utils.MatrixUtils;
 
+import java.util.Locale;
+
 
 /**
  * @author akasiyanik
  */
 public class SteadyingProcessWithClarification extends SteadyingProcess {
 
+    public final static int CLARIFICATION_ITERATION = 1;
     public SteadyingProcessWithClarification(AuxRungeKuttaMethod auxMethod, double EPS, double w, SteadyingEquation steadyingEquation) {
         super(auxMethod, EPS, w, steadyingEquation);
     }
@@ -33,18 +36,22 @@ public class SteadyingProcessWithClarification extends SteadyingProcess {
         iterationCountWithClarifying = 0;
         do {
             double[] Y1;
-            if (iterationCount % 2 == 0) {
+            if (iterationCount % CLARIFICATION_ITERATION == 0) {
+//                System.out.println("CLARIFICATION");
                 Y1 = doSteadyingIterationWithClarifying(Y);
-                iterationCountWithClarifying++;
             } else {
                 Y1 = doSimpleSteadyingIteration(Y);
             }
+            //SOUT: ||r||
+//            System.out.println(MatrixUtils.maxComponent(steadyingEquation.r(Y)));
+//            System.out.printf(Locale.ENGLISH, "%.9f,", MatrixUtils.maxComponent(steadyingEquation.r(Y1)));
+//            System.out.println();
             err = calculateErr(Y, Y1);
 //            System.out.println("POST In method Err = " + err);
             Y = Y1;
             iterationCount++;
         } while (err >= EPS);
-        System.out.println("iteration count into st. process - " + iterationCount);
+//        System.out.println("iteration count into st. process - " + iterationCount);
 
         return Y;
     }
@@ -57,11 +64,11 @@ public class SteadyingProcessWithClarification extends SteadyingProcess {
 //        printArray(Y1);
 //        double err = calculateErr(Y, Y1);
 //        System.out.println("\nPRE In method Err = " + err);
-        if (checkingConvergence()) {
+//        if (checkingConvergence()) {
             return clarify(Y, Y1);
-        } else {
-            return Y1;
-        }
+//        } else {
+//            return Y1;
+//        }
     }
 
     private double[] doSimpleSteadyingIteration(double[] Y) {
@@ -77,7 +84,10 @@ public class SteadyingProcessWithClarification extends SteadyingProcess {
         double[] r_k = steadyingEquation.r(Y);
         double[] r_k1 = steadyingEquation.r(Y1);
         double lambda_m = getEigenvalueApproximation(r_k, r_k1);
-        Y1 = MatrixUtils.subtract(Y1, MatrixUtils.scalarMultipy(1.0 / lambda_m, r_k1));
+        if (lambda_m > 0 || lambda_m < -1) {
+            iterationCountWithClarifying++;
+            Y1 = MatrixUtils.subtract(Y1, MatrixUtils.scalarMultipy(1.0 / lambda_m, r_k1));
+        }
         return Y1;
     }
 
